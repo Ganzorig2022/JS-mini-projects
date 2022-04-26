@@ -1,25 +1,35 @@
-let dislayNumber = 0;
-const displayAnswer = document.getElementsByClassName("box1")[0];
-console.log(displayAnswer);
+const operators = document.getElementsByClassName("operator");
+const clear = document.getElementsByClassName("clear")[0];
+let number = document.getElementsByClassName("number");
+let output = document.getElementsByClassName("output")[0];
+let firstNum = null;
 
-const btn = document.getElementsByTagName("button");
-console.log(btn);
+for (let i = 0; i < operators.length; i++) {
+  operators[i].addEventListener("click", function () {
+    operators[i].textContent;
+  });
+}
+for (let i = 0; i < number.length; i++) {
+  number[i].addEventListener("click", function (el) {
+    let numberStr = parseInt(el.target.textContent);
+    let numberInt = parseInt(number.textContent);
 
-let num7 = document.getElementsByClassName("number")[0];
-console.log(num7);
+    if (numberInt === 0) {
+      number.textContent = numberStr;
+    } else {
+      number.textContent += numberStr;
+    }
 
-let num8 = document.getElementsByClassName("number")[1];
-console.log(num8);
-
-btn.addEeventListener("click", show);
-
-function show() {
-  console.log("hi");
+    display(numberStr);
+  });
 }
 
-function number1() {
-  if (dislayNumber === 0) {
-    displayAnswer.innerHTML = dislayNumber;
-    console.log(dislayNumber);
-  }
+function display(num) {
+  output.textContent = num;
 }
+
+function clearAll(num) {
+  num = "";
+}
+
+clear.addEventListener("click", clearAll);
