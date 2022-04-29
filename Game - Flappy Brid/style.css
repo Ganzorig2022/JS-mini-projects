@@ -1,0 +1,39 @@
+.game-container {
+  width: 500px;
+  height: 730px;
+  position: absolute;
+}
+.sky {
+  background-color: blue;
+  width: 500px;
+  height: 580px;
+  position: absolute;
+}
+.ground {
+  background-color: brown;
+  width: 500px;
+  height: 150px;
+  position: absolute;
+  top: 580px;
+}
+.bird {
+  /* background-color: yellow; */
+  background-image: url(https://cutewallpaper.org/24/flappy-bird-pipe-png/flappy-df822-bird-9bc73-pipes-e976c-pngfappy-8148d-bird-55db5-sprite-8ae18-png-ec67b-transparent-44b51-png---key0.png);
+  background-size: auto center;
+  background-position: center;
+  background-repeat: no-repeat; 
+  position: absolute;
+  height: 45px;
+  width: 60px;
+}
+.obstacle {
+  background-image: url(https://cutewallpaper.org/24/flappy-bird-pipe-png/473420307.jpg);
+  background-size: auto center;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-color: green; */
+  width: 60px;
+  height: 300px;
+  position: absolute;
+  border-radius: 5px;
+}
