@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameDisplay = document.querySelector(".game-container");
   const ground = document.querySelector(".ground");
 
-  // bird-iig bairshliig random-oor ogood GRAVITY huwisagchiin utgaar bainga hasahaar bird ni dooshoogoo unana.
+  // bird-iig bairshliig talbain gold left:220px, bottom:500px-eer zaaj ogow. GRAVITY huwisagchiin utgaar bainga hasahaar bird ni dooshoogoo unana.
   let birdLeft = 220;
   let birdBottom = 500;
   let gravity = 2;
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bird.style.bottom = `${birdBottom}px`;
     bird.style.left = birdLeft + "px";
   }
-  // bird-oo doosh ni tasraltgv unagaahiin setInterval function-aar 20millisec-eer tawiw.
+  // bird-oo doosh ni tasraltgv unagaahiin tuld setInterval() function-aar 20millisec-eer tawiw.
   let gameTimerId = setInterval(startGame, 20);
 
   // keycode:32 ni keyboard-nii SPACE dr darah kommandig zaaj ogno. Space dr darahad jump() ajillana.
