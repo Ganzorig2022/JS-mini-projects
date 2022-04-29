@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bird.style.bottom = `${birdBottom}px`;
     bird.style.left = birdLeft + "px";
   }
+
   // bird-oo doosh ni tasraltgv unagaahiin tuld setInterval() function-aar 20millisec-eer tawiw.
   let gameTimerId = setInterval(startGame, 20);
 
@@ -32,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (birdBottom < 500) birdBottom += 50;
     bird.style.bottom = `${birdBottom}px`;
   }
-  // Keyboard ali neg towchin dr darah bvrt control() function ajillaj bird-iig vserdeg bolgono.
 
+  // Keyboard ali neg towchin dr darah bvrt control() function ajillaj bird-iig vserdeg bolgono.
   document.addEventListener("keyup", control);
 
   //========Saad totgor hiih function
@@ -51,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     obstacle.style.bottom = `${obstacleBottom}px`;
 
     //========Saad totgor-oo hodoldog bolgoh function
-
     function moveObstacle() {
       obstacleLeft -= 2;
       obstacle.style.left = `${obstacleLeft}px`;
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(timerId);
         gameDisplay.removeChild(obstacle);
       }
+
       // bird maani dooshoo unahdaa ground dr tulah buyu 0 bolohod gameOver() function ajillana. Bird-iin bairlal left:220px
       if (
         (obstacleLeft > 200 &&
@@ -71,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(timerId);
       }
     }
+    
     //saad maani 20mlsec tutamd hodolno. moveObstacle() function-iig ajluulna
     let timerId = setInterval(moveObstacle, 20);
     //   3000mSec buyu 3sec tutamd shine obstacle oruulj ogno.
