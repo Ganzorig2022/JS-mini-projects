@@ -77,17 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function flipCard() {
     //cardArray-iin massivaas data-id-g gargaj awna.
     var cardId = this.getAttribute("data-id");
-    console.log(cardArray[cardId].name);
-
-    // cardChosen[] empty array luu
+    // gargaj awsan ID-gaa array-n hed deh element zurag-iig gedgiig olod cardChosen[] array luu hiine.
     cardChosen.push(cardArray[cardId].name);
     cardChosenId.push(cardId);
-    // console.log(cardId + " id");
-    // console.log(cardChosen + " zurag");
-    // console.log(cardChosenId + " chosen ID");
 
+    // HMTL dotor vvssen src="blank.png" zurgiig shineer cardArray[] massiv dotor bga zuragnuudas songoj awch hiij ogno.
     this.setAttribute("src", cardArray[cardId].img);
-    // 2 zurag ergvvlsnii daraa ijil esehiig shalgah checkForMatch() function ajillana.
+    // 2 zurag ergvvlsnii daraa ijil esehiig shalgahdaa 0.5sec-iin daraa checkForMatch() function ajillana.
     if (cardChosen.length === 2) {
       setTimeout(checkForMatch, 500);
     }
@@ -97,19 +93,27 @@ document.addEventListener("DOMContentLoaded", () => {
     var cards = document.querySelectorAll("img");
     const optionOneId = cardChosenId[0];
     const optionTwoId = cardChosenId[1];
+    // Songoson 2 zuragnii NAME ni adilhan bwal tuhain bairand white zurag-aar solij ogoh.
     if (cardChosen[0] === cardChosen[1]) {
       alert("You found a match");
       cards[optionOneId].setAttribute("src", "images/white.png");
       cards[optionTwoId].setAttribute("src", "images/white.png");
+      // songoson zow zuragnudig cardsWon[] array luu hiij ogno.
       cardsWon.push(cardChosen);
-    } else {
+    }
+    // Herwee bish bol tuhain bairand blank zurag-aar solij ogoh.
+    else {
       cards[optionOneId].setAttribute("src", "images/blank.png");
       cards[optionTwoId].setAttribute("src", "images/blank.png");
       alert("Sorry try again!");
     }
+    // Songoson zurag, ID-nii array[]-g ergeed hooson bolgono.
     cardChosen = [];
     cardChosenId = [];
+
+    // HTML dotorh #result id-tai DIV dotor Score: gesen text-iin ard zow taasan zuragnuud niit LENGTH-tei tentsvv gej ogow.
     resultDisplay.textCotent = cardsWon.length;
+    // 2, 2-oor ni zow taasnii daraa niit 12shirheg zuragnii urt-iin taltai ni zow taasan zuragnii LENGTH ni tentsvv bwal HOJSON gesen vg.
     if (cardsWon.length === cardArray.lenght / 2) {
       resultDisplay.textContent = "Congratulations! you found them all";
     }
