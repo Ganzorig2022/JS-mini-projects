@@ -23,7 +23,6 @@ body {
   height: 90px;
   width: 90px;
   border: 1px solid #ccc;
-  /* border-radius: 5px; */
 }
 .player-one {
   background-color: red;
