@@ -1,30 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #000;
+  --secondary-color: #fff;
+}
+/* HTML tag dotor .dark class idewhjheer :root bsan primary-color-vvd esregeere REPLACE hiigdeed har ni tsagaan, tsagaan ni har bolno. */
+html.dark {
+  --primary-color: #fff;
+  --secondary-color: #333;
+  background-color: #111;
+  color: var(--primary-color);
+}
+html {
+  transition: all 0.5s ease-in;
+}
+
+body {
+  font-family: "Oswald", sans-serif;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+h1 {
+  position: absolute;
+  top: 50px;
+  margin: 50px;
+  font-size: 45px;
+  color: var(--primary-color);
+}
+h2 {
+  font-size: 2rem;
+  color: #fff;
+}
 .game-container {
   width: 500px;
   height: 730px;
-  position: absolute;
+  position: relative;
+  align-items: center;
+  margin: 200px auto;
+  border: 5px solid var(--primary-color);
+  border-radius: 10px;
+  overflow: hidden;
 }
 .sky {
-  background-color: blue;
-  width: 500px;
-  height: 580px;
+  /* background-color: #87ceeb; */
+  background-image: url(https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1162&q=80);
+  background-size: auto center;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 490px;
+  height: 600px;
   position: absolute;
 }
 .ground {
-  background-color: brown;
-  width: 500px;
-  height: 150px;
+  background-color: #9b7653;
+  background-image: url(https://images.unsplash.com/photo-1556249800-1689159a6e57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80);
+  width: 490px;
+  height: 120px;
   position: absolute;
-  top: 580px;
+  top: 600px;
+  z-index: +1;
 }
 .bird {
   /* background-color: yellow; */
   background-image: url(https://cutewallpaper.org/24/flappy-bird-pipe-png/flappy-df822-bird-9bc73-pipes-e976c-pngfappy-8148d-bird-55db5-sprite-8ae18-png-ec67b-transparent-44b51-png---key0.png);
   background-size: auto center;
   background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   position: absolute;
-  height: 45px;
-  width: 60px;
+  height: 30px;
+  width: 45px;
 }
 .obstacle {
   background-image: url(https://cutewallpaper.org/24/flappy-bird-pipe-png/473420307.jpg);
@@ -35,5 +87,107 @@
   width: 60px;
   height: 300px;
   position: absolute;
+  border-radius: 10px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+.topObstacle {
+  background-image: url(https://cutewallpaper.org/24/flappy-bird-pipe-png/473420307.jpg);
+  background-size: auto center;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+  width: 60px;
+  height: 300px;
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  cursor: pointer;
+  border: 0;
+  padding: 10px 20px;
+  background-color: #ac3e31;
+  color: #fff;
   border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* JS dr ".circle class idewhjsineer tsagaan booronhii durs garna. */
+button .circle {
+  position: absolute;
+  background-color: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: scale 0.5s ease-out;
+}
+
+@keyframes scale {
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+.btn:focus {
+  outline: 0;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+/* .btn:hover {
+  background-color: #222;
+} */
+
+.rules-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.dark-mode-btn {
+  background-color: var(--primary-color);
+  position: absolute;
+  color: var(--secondary-color);
+  top: 30px;
+  right: 30px;
+}
+#start-btn {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  z-index: 100;
+}
+#close-btn {
+  position: absolute;
+  top: 250px;
+  left: 230px;
+}
+p:first-of-type {
+  margin-top: 50px;
+}
+p:last-of-type {
+  margin-top: 20px;
+}
+/* JS dr show class ajillaagv ued zuun tiisheege -400px-eer nuugdsan bn. */
+.rules {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  width: 400px;
+  padding: 20px;
+  line-height: 1.5;
+  transform: translateX(-400px);
+  transition: transform 0.8s ease-in-out;
+}
+
+/* JS dr show class ajillah ued zuun talaasa garch irne. */
+.rules.show {
+  transform: translateX(0);
 }
