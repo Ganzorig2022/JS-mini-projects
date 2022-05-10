@@ -12,69 +12,44 @@
     ></script>
   </head>
   <body>
+    <!-- HEADER -->
     <header>
-      <div class="cart-container">
-        <i class="fas fa-shopping-cart"></i>
-        <p>1</p>
+      <h1>Window shopping</h1>
+      <div class="cart-icon-container">
+        <button id="cartBtn"><i class="fas fa-shopping-cart"></i></button>
+        <p id="itemCounter" class="">1</p>
       </div>
     </header>
-    <div class="item-container">
-      <div class="shop-item">
-        <img
-          src="https://cdn3.shoppy.mn/spree/images/974685/small/0541002081-1.jpg"
-          alt=""
-        />
-        <p>Jeans</p>
-        <p>109,900₮</p>
-        <div class="addCart-container">
-          <button type="button" class="btn-remove">-</button>
-          <input type="text" class="inputQty" />
-          <button type="button" class="btn-add">+</button>
-          <button type="button" class="btn-cart">Add Cart</button>
-        </div>
+    <!-- CART ITEMS -->
+    <div id="cart-item-container" class="cart-item-container">
+      <h2>Your Products:</h2>
+      <div class="cart-items">
+        <!-- <div class="cart-item">
+          <img
+            class="cart-item-image"
+            src="https://cdn3.shoppy.mn/spree/images/974685/small/0541002081-1.jpg"
+            width="70px"
+            height="70px"
+          />
+          <span>Jeans</span>
+          <span class="cart-price">100$</span>
+          <button class="btn-danger">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div> -->
       </div>
-      <div class="shop-item">
-        <img
-          src="https://cdn3.shoppy.mn/spree/images/930876/small/open-uri20210331-780268-16y9vxp."
-          alt=""
-        />
-        <p>Jeans</p>
-        <p>109,900₮</p>
-        <div class="addCart-container">
-          <button type="button" class="btn-remove">-</button>
-          <input type="text" class="inputQty" />
-          <button type="button" class="btn-add">+</button>
-          <button type="button" class="btn-cart">Add Cart</button>
-        </div>
+      <!-- TOTAL PRICE -->
+      <div class="cart-total">
+        <strong class="cart-total-title">Total&nbsp;:&nbsp;&nbsp;</strong>
+        <span class="cart-total-price">0 ₮</span>
       </div>
-      <div class="shop-item">
-        <img
-          src="https://cdn3.shoppy.mn/spree/images/955971/small/open-uri20210420-2245422-juqlu."
-        />
-        <p>Jeans</p>
-        <p>109,900₮</p>
-        <div class="addCart-container">
-          <button type="button" class="btn-remove">-</button>
-          <input type="text" class="inputQty" />
-          <button type="button" class="btn-add">+</button>
-          <button type="button" class="btn-cart">Add Cart</button>
-        </div>
-      </div>
-      <div class="shop-item">
-        <img
-          src="https://cdn3.shoppy.mn/spree/images/1272838/small/open-uri20220318-3643811-r1ouwi."
-          alt=""
-        />
-        <p>Jeans</p>
-        <p>109,900₮</p>
-        <div class="addCart-container">
-          <button type="button" class="btn-remove">-</button>
-          <input type="text" class="inputQty" />
-          <button type="button" class="btn-add">+</button>
-          <button type="button" class="btn-cart">Add Cart</button>
-        </div>
-      </div>
+      <button id="close-btn" class="btn">Close</button>
     </div>
+    <!-- SHOP ITEM SECTION -->
+    <section class="item-container">
+      <!-- JS -->
+      <!-- JS -->
+    </section>
     <script src="cart.js"></script>
   </body>
 </html>
