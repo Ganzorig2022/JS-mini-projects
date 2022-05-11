@@ -28,7 +28,7 @@ const products = [
   },
 ];
 
-const selectedProducts = [];
+let selectedProducts = [];
 
 if (document.readyState == "loading") {
   document.addEventListener("DOMContentLoaded", ready);
@@ -36,15 +36,7 @@ if (document.readyState == "loading") {
   ready();
 }
 
-// const itemCounterAddBtn = document.getElementsByClassName("btn-add");
-// const inputQty = document.getElementsByClassName("inputQty");
-// for (let i = 0; i < itemCounterAddBtn.length; i++) {
-//   var buttonAdd = itemCounterAddBtn[i];
-//   buttonAdd.addEventListener("click", function (e, idx) {
-//     const selectedProduct = products[idx];
-//     console.log(products[idx]);
-//   });
-// }
+const countItem = document.getElementById("itemCounter");
 
 function ready() {
   listViewProducts();
@@ -59,15 +51,16 @@ function ready() {
 
       selectedProducts.push(selectedProduct);
 
-      const countItem = document.getElementById("itemCounter");
       countItem.classList.add("visible");
       countItem.textContent = selectedProducts.length;
+     
       addItemToCart();
       updateCartTotal();
     });
   }
 }
 
+// ============Delgetsend baigaa baraanuud===========
 function listViewProducts() {
   const listProducts = document.getElementsByClassName("item-container")[0];
   let itemHtml = "";
@@ -90,36 +83,36 @@ function listViewProducts() {
   });
   listProducts.innerHTML = itemHtml;
 }
+
+// ============Sagsand orson baraanuud===========
 function addItemToCart() {
   let cartItem = "";
   const cartItemList = document.getElementsByClassName("cart-items")[0];
-  selectedProducts.forEach((product) => {
+  selectedProducts.forEach((item, idx) => {
     cartItem += `
     <div class="cart-item">
-        <img class="cart-item-image" src="${product.image}" width="70px" height="70px"/>
-        <span>${product.title}</span>
-        <span class="cart-price">${product.price} ₮</span>
-        <button id="btn-danger">
+        <img class="cart-item-image" src="${item.image}" width="70px" height="70px"/>
+        <span>${item.title}</span>
+        <span class="cart-price">${item.price} ₮</span>
+        <button id="btn-danger" onclick="removeCartItems(${item.id})">
           <i class="fas fa-trash"></i>
         </button>
     </div>`;
   });
   cartItemList.innerHTML = cartItem;
-
-  const removeCartItem = document.querySelectorAll("#btn-danger");
-  removeCartItem.forEach(function (task) {
-    task.addEventListener("click", removeTask);
-  });
 }
+
+// ============Sagsand orson baraanuudiin too hemjee===========
+
+let cartTotal = document.getElementsByClassName("cart-total-price")[0];
 
 function updateCartTotal() {
   let totalPrice = 0;
   selectedProducts.forEach((item) => {
     totalPrice += item.price;
   });
-
-  document.getElementsByClassName("cart-total-price")[0].textContent =
-    "$" + totalPrice;
+  // console.log(selectedProducts);
+  cartTotal.textContent = totalPrice + "₮";
 }
 
 // ===============================================================
@@ -136,8 +129,17 @@ closeBtn.addEventListener("click", () => {
 });
 
 // =================================================
-function removeTask(e) {
-  if (e.target.parentElement.parentElement.classList.contains("cart-item")) {
-    e.target.parentElement.parentElement.remove();
-  }
+function removeCartItems(id) {
+  selectedProducts = selectedProducts.filter((productsItem) => {
+    return productsItem.id != id;
+  });
+  console.log(selectedProducts);
+  addItemToCart();
+
+  let totalPrice = 0;
+  selectedProducts.forEach((item) => {
+    totalPrice -= item.price;
+  });
+  // console.log(selectedProducts);
+  cartTotal.textContent = Math.abs(totalPrice) + "₮";
 }
