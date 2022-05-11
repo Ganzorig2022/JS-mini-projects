@@ -77,7 +77,22 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
   checkRequired([username, email, password, password2]);
   checkLength(username, 3, 15);
-  checkLength(password, 6, 20);
+  checkLength(password, 3, 20);
   checkEmail(email);
   checkPasswordsMatch(password, password2);
+
+  const userName = form.username.value;
+  const passWord = form.password.value;
+  const eMail = form.email.value;
+  console.log(userName);
+  if (
+    userName === "ganzo" &&
+    eMail === "ganzo.galaxy@gmail.com" &&
+    passWord === "123"
+  ) {
+    alert("You have successfully logged in.");
+    window.location.href = "cart.html";
+  } else {
+    alert("You have failed to logged in.");
+  }
 });
