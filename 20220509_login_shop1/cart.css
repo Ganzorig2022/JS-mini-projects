@@ -1,5 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+/* @import url("https://fonts.googleapis.com/css?family=Muli&display=swap"); */
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 
+:root {
+  --modal-duration: 1s;
+  --primary-color: #30336b;
+  /* --secondary-color: #be2edd; */
+  --secondary-color: #e74c3c;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,15 +14,88 @@
 }
 
 body {
-  font-family: "Muli", sans-serif;
+  font-family: "Lato", sans-serif;
   background-color: #eafbff;
+  transition: transform 0.3s ease;
+}
+
+/* JS dr navbar dr button darahad body ter chigeeree hodloj NAVBAR garch irne. NAVBAR:200px width uchraas...*/
+body.show-nav {
+  transform: translate(200px);
+}
+/* COLUMN NAVBAR */
+nav {
+  background-color: var(--primary-color);
+  border-right: 2px solid rgba(200, 200, 200, 0.1);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  z-index: 100;
+  /* zuun tiisheege 200px buyu 100%-aar alga boloh */
+  transform: translateX(-100%);
+}
+
+nav .logo {
+  padding: 30px 0;
+  text-align: center;
+}
+
+nav .logo img {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+nav ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+nav ul li {
+  border-bottom: 2px solid rgba(200, 200, 200, 0.1);
+  padding: 20px;
+}
+
+/* HOME gesen LINK-nii deer border hiiw. */
+nav ul li:first-of-type {
+  border-top: 2px solid rgba(200, 200, 200, 0.1);
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
 }
 
 header {
-  background-color: #3d3d3d;
+  background-color: var(--primary-color);
   width: 100vw;
   height: 100px;
   position: relative;
+}
+
+/* button-ii toggle class */
+.toggle {
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: var(--secondary-color);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+.fa-bars {
+  font-size: 1rem;
 }
 h1 {
   position: absolute;
@@ -34,10 +114,14 @@ h1 {
   border: 0;
 }
 
-.cart-icon-container .fa-shopping-cart {
+.fa-shopping-cart {
   color: #fff;
   font-size: 1.5rem;
   margin: 50px;
+  cursor: pointer;
+}
+.fa-shopping-cart.red {
+  color: var(--secondary-color);
 }
 
 /* Counter Styles */
@@ -45,11 +129,11 @@ h1 {
   position: absolute;
   top: 20px;
   right: 10px;
-  background-color: #e74c3c;
+  background-color: var(--secondary-color);
   color: #fff;
   font-weight: bold;
   text-align: center;
-  padding: 10px;
+  padding: 5px 10px;
   border-radius: 50%;
   visibility: hidden;
 }
@@ -66,12 +150,11 @@ h1 {
 }
 
 .shop-item {
-  border: 1px solid #3d3d3d;
+  border: 2px solid var(--primary-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   width: 200px;
   background-color: #fff;
   margin: 10px;
@@ -81,7 +164,7 @@ h1 {
 }
 .shop-item p {
   margin-top: 5px;
-  z-index: 100;
+  z-index: 1;
 }
 .shop-item img {
   padding-top: 10px;
@@ -113,6 +196,7 @@ h1 {
   border: 1px solid #000;
   border-radius: 5px;
   background-color: lightblue;
+  cursor: pointer;
 }
 
 button:focus {
@@ -138,10 +222,12 @@ button:active {
   transform: scale(0.9);
 }
 
+/* SAGSAND NEMEH BUTTON */
 .btn-cart {
   font-size: 10px !important;
-  background-color: steelblue !important;
-  color: #eafbff !important;
+  background-color: var(--secondary-color) !important;
+  color: #fff !important;
+  cursor: pointer;
 }
 
 #close-btn {
@@ -157,18 +243,20 @@ button:active {
 /* JS dr show class ajillaagv nuugdsan bn. */
 .cart-item-container {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #333;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  background-color: var(--primary-color);
   color: #fff;
-  min-height: 100vh;
-  width: 400px;
-  height: 600px;
+  border-radius: 10px;
+  width: 600px;
   line-height: 1.5;
   visibility: hidden;
   padding: 20px;
+  z-index: 100;
   transition: visibility 0.2s ease-in-out;
-  /* overflow-y: scroll; */
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* JS dr show class ajillah ued haragdana. */
@@ -198,12 +286,17 @@ button:active {
   margin-right: 10px;
 }
 .fa-trash {
-  color: #e74c3c;
+  color: var(--secondary-color);
 }
 
-
 /* CART TOTAL */
-.cart-total{
+.cart-total {
+  margin: 10px 0;
   display: flex;
   justify-content: flex-end;
+  border-top: 1px solid #fff;
+}
+.cart-total-title,
+.cart-total-price {
+  padding-top: 10px;
 }
