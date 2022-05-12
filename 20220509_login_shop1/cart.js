@@ -53,7 +53,7 @@ function ready() {
 
       countItem.classList.add("visible");
       countItem.textContent = selectedProducts.length;
-     
+
       addItemToCart();
       updateCartTotal();
     });
@@ -99,6 +99,7 @@ function addItemToCart() {
         </button>
     </div>`;
   });
+
   cartItemList.innerHTML = cartItem;
 }
 
@@ -130,16 +131,15 @@ closeBtn.addEventListener("click", () => {
 
 // =================================================
 function removeCartItems(id) {
-  selectedProducts = selectedProducts.filter((productsItem) => {
-    return productsItem.id != id;
+  selectedProducts = selectedProducts.filter((productsItem, index) => {
+    return (
+      selectedProducts.indexOf(productsItem) != index || productsItem.id != id
+    );
   });
-  console.log(selectedProducts);
-  addItemToCart();
 
-  let totalPrice = 0;
-  selectedProducts.forEach((item) => {
-    totalPrice -= item.price;
-  });
-  // console.log(selectedProducts);
-  cartTotal.textContent = Math.abs(totalPrice) + "₮";
+  console.log(selectedProducts);
+  countItem.textContent = selectedProducts.length;
+
+  addItemToCart();
+  updateCartTotal();
 }
