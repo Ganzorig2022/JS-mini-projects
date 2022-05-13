@@ -52,10 +52,19 @@ function ready() {
       if (isExist > -1) {
         alert("Ene baraa sagsand orson bn.");
       } else {
-        selectedProducts.push(selectedProduct);
+        const itemCart = {
+          id: selectedProduct.id,
+          title: selectedProduct.title,
+          image: selectedProduct.image,
+          product: selectedProduct,
+          count: 1,
+          subtotal: function () {
+            return selectedProduct.price * this.count;
+          },
+        };
+        selectedProducts.push(itemCart);
       }
-
-    
+      console.log(selectedProducts);
       cartCounter();
       addItemToCart();
       updateCartTotal();
@@ -75,30 +84,31 @@ function listViewProducts() {
           alt=""
         />
         <p>${item.title}</p>
-        <p>${item.price}₮</p>
+        <p>${item.price} ₮</p>
         <div class="addCart-container">
-          <button type="button" id="btn-remove">-</button>
-          <input type="text" class="inputQty" required/>
-          <button type="button" id="btn-add">+</button>
           <button type="button" class="btn-cart">Сагсанд нэмэх</button>
         </div>
       </div>`;
   });
+
   listProducts.innerHTML = itemHtml;
 }
+
 const productsInCart = {};
 
 // ============Sagsand orson baraanuud===========
 function addItemToCart() {
   let cartItem = "";
   const cartItemList = document.getElementsByClassName("cart-items")[0];
-  selectedProducts.forEach((item) => {
+  selectedProducts.forEach((item, idx) => {
     cartItem += `
     <div class="cart-item">
         <img class="cart-item-image" src="${item.image}" width="70px" height="70px"/>
         <span>${item.title}</span>
-        <span class="cart-price">${item.price} ₮</span>
-        <span class="cart-price">ш</span>
+        <span class="cart-price">${item.product.price} ₮</span>
+        <span class="cart-count">${item.count} ш</span>
+        <button type="button" class="btn-remove">-</button>
+        <button type="button" class="btn-add">+</button>
         <button id="btn-danger" onclick="removeCartItems(${item.id})">
           <i class="fas fa-trash"></i>
         </button>
@@ -106,6 +116,7 @@ function addItemToCart() {
   });
 
   cartItemList.innerHTML = cartItem;
+  increaseBtn();
 }
 
 // ============Sagsand orson baraanuudiin too hemjee===========
@@ -115,7 +126,8 @@ let cartTotal = document.getElementsByClassName("cart-total-price")[0];
 function updateCartTotal() {
   let totalPrice = 0;
   selectedProducts.forEach((item) => {
-    totalPrice += item.price;
+    totalPrice += item.subtotal();
+    console.log(item.subtotal());
   });
   cartTotal.textContent = totalPrice + "₮";
 }
@@ -169,8 +181,19 @@ toggle.addEventListener("click", () => {
   document.body.classList.toggle("show-nav");
 });
 
-// const increaseCountBtn = document.getElementById("btn-add");
-// console.log(increaseCountBtn);
-// increaseCountBtn.addEventListener("click", () => {
-//   console.log("increase");
-// })
+function increaseBtn() {
+  const increaseCountBtn = document.getElementsByClassName("btn-add");
+
+  for (let i = 0; i < increaseCountBtn.length; i++) {
+    increaseCountBtn[i].addEventListener("click", () => {
+      selectedProducts[i].count = selectedProducts[i].count + 1;
+      let a = document.getElementsByClassName("cart-count");
+      const arr = Array.from(a);
+      arr.forEach((item, idx) => {
+        item.textContent = selectedProducts[idx].count + "sh";
+      });
+      // console.log(selectedProducts[0].count);
+      updateCartTotal();
+    });
+  }
+}

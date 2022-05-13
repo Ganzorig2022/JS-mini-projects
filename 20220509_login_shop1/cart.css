@@ -185,20 +185,6 @@ h1 {
   margin: 10px;
 }
 
-.addCart-container button {
-  color: #000;
-  font-size: 1rem;
-  text-transform: uppercase;
-  padding: 0 10px;
-  overflow: hidden;
-  height: 100%;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 5px;
-  background-color: lightblue;
-  cursor: pointer;
-}
-
 button:focus {
   outline: 0;
 }
@@ -206,28 +192,16 @@ button:active {
   transform: scale(0.9);
 }
 
-/* input-iin undsen style */
-.inputQty {
-  width: 40px;
-  height: 100%;
-  padding: 10px;
-  border: 0;
-  border-top: 1px #3d3d3d solid;
-  border-bottom: 1px #3d3d3d solid;
-  font-size: 12px;
-}
-.inputQty:focus,
-.inputQty:valid {
-  outline: 0;
-  transform: scale(0.9);
-}
-
 /* SAGSAND NEMEH BUTTON */
 .btn-cart {
-  font-size: 10px !important;
-  background-color: var(--secondary-color) !important;
+  font-size: 1rem;
+  background-color: var(--secondary-color);
   color: #fff !important;
   cursor: pointer;
+  padding: 0 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #000;
 }
 
 #close-btn {
@@ -285,6 +259,21 @@ button:active {
   font-size: 1.5rem;
   margin-right: 10px;
 }
+.cart-item #btn-add,
+.cart-item #btn-remove {
+  color: #000;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 0 10px;
+  overflow: hidden;
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: lightblue;
+  cursor: pointer;
+}
+
 .fa-trash {
   color: var(--secondary-color);
 }
