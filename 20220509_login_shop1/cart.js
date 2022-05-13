@@ -1,33 +1,32 @@
-const products = [
-  {
-    id: 1,
-    title: "jeans",
-    price: 30000,
-    image: "https://cdn3.shoppy.mn/spree/images/974685/small/0541002081-1.jpg",
-  },
-  {
-    id: 2,
-    title: "jeans-1",
-    price: 45000,
-    image:
-      "https://cdn3.shoppy.mn/spree/images/930876/small/open-uri20210331-780268-16y9vxp.",
-  },
-  {
-    id: 3,
-    title: "jeans-2",
-    price: 55000,
-    image:
-      "https://cdn3.shoppy.mn/spree/images/955971/small/open-uri20210420-2245422-juqlu.",
-  },
-  {
-    id: 4,
-    title: "jeans-3",
-    price: 25000,
-    image:
-      "https://cdn3.shoppy.mn/spree/images/1272838/small/open-uri20220318-3643811-r1ouwi.",
-  },
-];
+let products = [];
 
+let limit = 5;
+// let page = 1;
+// https://fakestoreapi.com/products?limit=${limit}
+
+async function getApi() {
+  try {
+    const response = await fetch("https://fakestoreapi.com/products");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    alert("aldaa" + error);
+  }
+}
+
+async function showApi() {
+  const posts = await getApi();
+  // console.log(posts);
+  for (let i = 0; i < posts.length; i++) {
+    // console.log(posts[i]);
+    products.push(posts[i]);
+  }
+
+  setInterval(ready, 2000);
+}
+showApi();
+
+console.log(products);
 if (document.readyState == "loading") {
   document.addEventListener("DOMContentLoaded", ready);
 } else {
@@ -44,13 +43,12 @@ function ready() {
     let btnAddToCart = addToCartButtons[i];
     btnAddToCart.addEventListener("click", function () {
       const selectedProduct = products[i];
-
       const isExist = selectedProducts.findIndex(
         (item) => item.id === selectedProduct.id
       );
 
       if (isExist > -1) {
-        alert("Ene baraa sagsand orson bn.");
+        swal("Уучлаарай, энэ бараа сагсанд орсон байна!");
       } else {
         const itemCart = {
           id: selectedProduct.id,
@@ -64,7 +62,7 @@ function ready() {
         };
         selectedProducts.push(itemCart);
       }
-      console.log(selectedProducts);
+      shakeCartIcon();
       cartCounter();
       addItemToCart();
       updateCartTotal();
@@ -83,10 +81,10 @@ function listViewProducts() {
           src="${item.image}"
           alt=""
         />
-        <p>${item.title}</p>
-        <p>${item.price} ₮</p>
+        <p>${shortenString(item.title)}</p>
+        <p>${numberWithCommas(item.price)} ₮</p>
         <div class="addCart-container">
-          <button type="button" class="btn-cart">Сагсанд нэмэх</button>
+          <button type="button" class="btn-cart" >Сагсанд нэмэх</button>
         </div>
       </div>`;
   });
@@ -100,15 +98,22 @@ const productsInCart = {};
 function addItemToCart() {
   let cartItem = "";
   const cartItemList = document.getElementsByClassName("cart-items")[0];
-  selectedProducts.forEach((item, idx) => {
+  selectedProducts.forEach((item) => {
     cartItem += `
     <div class="cart-item">
-        <img class="cart-item-image" src="${item.image}" width="70px" height="70px"/>
-        <span>${item.title}</span>
-        <span class="cart-price">${item.product.price} ₮</span>
-        <span class="cart-count">${item.count} ш</span>
+        <img class="cart-item-image" src="${
+          item.image
+        }" width="70px" height="70px"/>
+        <span>${shortenString(item.title)}</span>
+        <span class="cart-price">${numberWithCommas(
+          item.product.price
+        )} ₮</span>
         <button type="button" class="btn-remove">-</button>
+        <span class="cart-count">${item.count} ш</span>
         <button type="button" class="btn-add">+</button>
+        <span class="cart-subTotal-price">= ${numberWithCommas(
+          item.subtotal()
+        )} ₮</span>
         <button id="btn-danger" onclick="removeCartItems(${item.id})">
           <i class="fas fa-trash"></i>
         </button>
@@ -117,19 +122,22 @@ function addItemToCart() {
 
   cartItemList.innerHTML = cartItem;
   increaseBtn();
+  decreaseBtn();
 }
 
-// ============Sagsand orson baraanuudiin too hemjee===========
+// ============Sagsand orson baraanuudiin MONGON DUN===========
 
 let cartTotal = document.getElementsByClassName("cart-total-price")[0];
 
 function updateCartTotal() {
+  addItemToCart();
   let totalPrice = 0;
+
   selectedProducts.forEach((item) => {
     totalPrice += item.subtotal();
-    console.log(item.subtotal());
   });
-  cartTotal.textContent = totalPrice + "₮";
+
+  cartTotal.textContent = numberWithCommas(totalPrice.toFixed(1)) + "₮";
 }
 
 // ==============Sagsan dah baraag ustgadag heseg==================
@@ -160,6 +168,40 @@ function cartCounter() {
   }
 }
 
+// =======Sagsan dah baraanii toog NEMEHED mongon dun, too shirheg--ig oorchildog function============
+function increaseBtn() {
+  const increaseCountBtn = document.getElementsByClassName("btn-add");
+
+  for (let i = 0; i < increaseCountBtn.length; i++) {
+    increaseCountBtn[i].addEventListener("click", () => {
+      selectedProducts[i].count++;
+      let cartCount = document.getElementsByClassName("cart-count");
+      const arr = Array.from(cartCount);
+      arr.forEach((item, idx) => {
+        item.textContent = selectedProducts[idx].count + " ш";
+      });
+      updateCartTotal();
+    });
+  }
+}
+
+// =======Sagsan dah baraanii toog HASAHAD mongon dun, too shirheg--ig oorchildog function============
+function decreaseBtn() {
+  const decreaseCountBtn = document.getElementsByClassName("btn-remove");
+
+  for (let i = 0; i < decreaseCountBtn.length; i++) {
+    decreaseCountBtn[i].addEventListener("click", () => {
+      selectedProducts[i].count--;
+      let cartCount = document.getElementsByClassName("cart-count");
+      const arr = Array.from(cartCount);
+      arr.forEach((item, idx) => {
+        item.textContent = selectedProducts[idx].count + " ш";
+      });
+      updateCartTotal();
+    });
+  }
+}
+
 // ====Sagsan dah baraag haruulah tsonhiig neej haah heseg=========
 const cartBtn = document.getElementById("cartBtn");
 const cartItemContainer = document.getElementById("cart-item-container");
@@ -181,19 +223,17 @@ toggle.addEventListener("click", () => {
   document.body.classList.toggle("show-nav");
 });
 
-function increaseBtn() {
-  const increaseCountBtn = document.getElementsByClassName("btn-add");
+//======= cart Icon-iig shake buyu SEGSERDEG animation=========
+function shakeCartIcon() {
+  cartIcon.classList.add("shake");
+}
 
-  for (let i = 0; i < increaseCountBtn.length; i++) {
-    increaseCountBtn[i].addEventListener("click", () => {
-      selectedProducts[i].count = selectedProducts[i].count + 1;
-      let a = document.getElementsByClassName("cart-count");
-      const arr = Array.from(a);
-      arr.forEach((item, idx) => {
-        item.textContent = selectedProducts[idx].count + "sh";
-      });
-      // console.log(selectedProducts[0].count);
-      updateCartTotal();
-    });
-  }
+//======= Toonii BUHEL ORON bolgodog function (1000 => 1,000)=========
+function numberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+//======= Text-iin TASDAAD bagasgadag function (1000 => 1,000)=========
+function shortenString(string) {
+  return string.replace(/^(.{11}[^\s]*).*/, "$1");
 }
