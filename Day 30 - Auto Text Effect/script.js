@@ -1,4 +1,4 @@
-// label tagnii ID
+// h1 tagnii ID
 const textEl = document.getElementById("text");
 // input-iin "speed" ID. Speed attribute-tei uchraas...
 const speedEl = document.getElementById("speed");
@@ -11,7 +11,7 @@ writeText();
 
 function writeText() {
   // string dr slice method ni "I" "L" "O" "V" "E" geh met vseg vsgeer ni tasddag.
-  // label tagnii text dotor ni const=text-iig ogow.
+  // h1 tagnii text dotor ni const=text-iig ogow.
   textEl.innerText = text.slice(0, idx);
 
   idx++;
