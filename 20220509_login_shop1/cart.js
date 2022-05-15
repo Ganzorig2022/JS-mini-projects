@@ -10,15 +10,15 @@ async function getApi() {
     const data = await response.json();
     return data;
   } catch (error) {
-    alert("aldaa" + error);
+    // alert("Алдаа:" + error);
+    swal("Алдаа:" + error);
   }
 }
 
 async function showApi() {
   const posts = await getApi();
-  // console.log(posts);
+
   for (let i = 0; i < posts.length; i++) {
-    // console.log(posts[i]);
     products.push(posts[i]);
   }
 
@@ -26,7 +26,6 @@ async function showApi() {
 }
 showApi();
 
-console.log(products);
 if (document.readyState == "loading") {
   document.addEventListener("DOMContentLoaded", ready);
 } else {
@@ -70,7 +69,7 @@ function ready() {
   }
 }
 
-// ============Delgetsend baigaa baraanuud===========
+// ================Delgetsend baigaa baraanuud=====================
 function listViewProducts() {
   const listProducts = document.getElementsByClassName("item-container")[0];
   let itemHtml = "";
@@ -84,7 +83,8 @@ function listViewProducts() {
         <p>${shortenString(item.title)}</p>
         <p>${numberWithCommas(item.price)} ₮</p>
         <div class="addCart-container">
-          <button type="button" class="btn-cart" >Сагсанд нэмэх</button>
+          <button type="button" class="btn-cart" >Сагсанд нэмэх
+          <i class="fas fa-paper-plane"></i></button>
         </div>
       </div>`;
   });
@@ -94,7 +94,7 @@ function listViewProducts() {
 
 const productsInCart = {};
 
-// ============Sagsand orson baraanuud===========
+// ====================Sagsand orson baraanuud=====================
 function addItemToCart() {
   let cartItem = "";
   const cartItemList = document.getElementsByClassName("cart-items")[0];
@@ -236,4 +236,24 @@ function numberWithCommas(number) {
 //======= Text-iin TASDAAD bagasgadag function (1000 => 1,000)=========
 function shortenString(string) {
   return string.replace(/^(.{11}[^\s]*).*/, "$1");
+}
+
+// ======h1 tagnii TEXT ni usegnuud ar araasa ursdag effect========
+const textEl = document.getElementById("flowing-text");
+const text = "Манай Онлайн Дэлгүүрээр тавтай үйлчлүүлээрэй!";
+
+let idx = 1;
+
+flowText();
+
+function flowText() {
+  textEl.innerText = text.slice(0, idx);
+
+  idx++;
+
+  if (idx > text.length) {
+    idx = 1;
+  }
+
+  setTimeout(flowText, 200);
 }
