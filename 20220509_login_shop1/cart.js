@@ -1,10 +1,7 @@
-let products = [];
-
+let productsArr = [];
 const catBtn = document.getElementsByClassName("catBtn");
-let limit = 5;
-// let page = 1;
-// https://fakestoreapi.com/products?limit=${limit}
 
+// ===============1. FETCH-ee Data TATAh===========
 async function getApi() {
   try {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -16,46 +13,70 @@ async function getApi() {
   }
 }
 
+// =============2. IRSEN PROMISE-iig ProductsArr[] array luu push-leh============
 async function showApi() {
-  const posts = await getApi();
+  const productObject = await getApi();
 
-  for (let i = 0; i < posts.length; i++) {
-    products.push(posts[i]);
+  for (let i = 0; i < productObject.length; i++) {
+    productsArr.push(productObject[i]);
   }
+
+  //============3. CATEGORY SONGOLT===========
   for (let i of catBtn) {
     i.addEventListener("click", () => {
       if (i.id == "all-products") {
-        listViewProducts(products);
+        // delgetsend baraa haruuldag function ruu parameter damjuulah
+        showAllProductsList(productsArr);
+
+        // delgetsend baraa haruuldag function ruu parameter damjuulah
+        addItemsToCart(productsArr);
       } else {
-        const filteredItems = products.filter((item) => 
-           item.category == i.id)
-      
-        listViewProducts(filteredItems);
-        console.log(filteredItems);
+        const filteredItems = productsArr.filter(
+          (item) => item.category == i.id
+        );
+
+        showAllProductsList(filteredItems);
+        addItemsToCart(filteredItems);
       }
     });
   }
-
-  setTimeout(ready, 2000);
 }
 showApi();
 
-if (document.readyState == "loading") {
-  document.addEventListener("DOMContentLoaded", ready);
-} else {
-  ready();
+// ================4. DELGETSEND BUH BARAA-g HARUULAH=====================
+function showAllProductsList(ProductFromCategory) {
+  const listProducts = document.getElementsByClassName("item-container")[0];
+  let itemHtml = "";
+  ProductFromCategory.forEach((item) => {
+    itemHtml += `
+    <div class="shop-item" data-id=${item.id}>
+        <img
+          src="${item.image}"
+          alt=""
+        />
+        <p>${shortenString(item.title)}</p>
+        <p>${numberWithCommas(item.price)} ₮</p>
+        <div class="addCart-container">
+          <button type="button" class="btn-cart" >Сагсанд нэмэх
+          <i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>`;
+  });
+
+  listProducts.innerHTML = itemHtml;
 }
 
+// ================5. SONGOSON BARAAG SAGS RUU YAWUULAH====================
 let selectedProducts = [];
 const countItem = document.getElementById("itemCounter");
 const addToCartButtons = document.getElementsByClassName("btn-cart");
 
-function ready() {
-  listViewProducts(products);
+function addItemsToCart(ProductFromCategory) {
   for (let i = 0; i < addToCartButtons.length; i++) {
     let btnAddToCart = addToCartButtons[i];
     btnAddToCart.addEventListener("click", function () {
-      const selectedProduct = products[i];
+      const selectedProduct = ProductFromCategory[i];
+
       const isExist = selectedProducts.findIndex(
         (item) => item.id === selectedProduct.id
       );
@@ -74,43 +95,17 @@ function ready() {
           },
         };
         selectedProducts.push(itemCart);
-        console.log(selectedProducts);
       }
       shakeCartIcon();
       cartCounter();
-      addItemToCart();
+      showCartProducts();
       updateCartTotal();
     });
   }
 }
 
-// ================Delgetsend baigaa baraanuud=====================
-function listViewProducts(data) {
-  const listProducts = document.getElementsByClassName("item-container")[0];
-  let itemHtml = "";
-  data.forEach((item) => {
-    itemHtml += `
-    <div class="shop-item" data-id=${item.id}>
-        <img
-          src="${item.image}"
-          alt=""
-        />
-        <p>${shortenString(item.title)}</p>
-        <p>${numberWithCommas(item.price)} ₮</p>
-        <div class="addCart-container">
-          <button type="button" class="btn-cart" >Сагсанд нэмэх
-          <i class="fas fa-paper-plane"></i></button>
-        </div>
-      </div>`;
-  });
-
-  listProducts.innerHTML = itemHtml;
-}
-
-const productsInCart = {};
-
-// ====================Sagsand orson baraanuud=====================
-function addItemToCart() {
+// ====================6. SAGSAND IRSEN BARAAG HARUULAH=====================
+function showCartProducts() {
   let cartItem = "";
   const cartItemList = document.getElementsByClassName("cart-items")[0];
   selectedProducts.forEach((item) => {
@@ -140,22 +135,27 @@ function addItemToCart() {
   decreaseBtn();
 }
 
-// ============Sagsand orson baraanuudiin MONGON DUN===========
-
-let cartTotal = document.getElementsByClassName("cart-total-price")[0];
+// ============7. Sagsand orson baraanuudiin NiiT MONGON DUN===========
+let cartTotal = document.getElementsByClassName("cart-total")[0];
+let cartTotalPrice = document.getElementsByClassName("cart-total-price")[0];
 
 function updateCartTotal() {
-  addItemToCart();
+  showCartProducts();
   let totalPrice = 0;
 
+  if (selectedProducts.length == 0) {
+    cartTotal.classList.add("hidden");
+    swal("Таны сагс хоосон байна");
+  } else {
+    cartTotal.classList.remove("hidden");
+  }
   selectedProducts.forEach((item) => {
     totalPrice += item.subtotal();
+
+    cartTotalPrice.textContent = numberWithCommas(totalPrice.toFixed(1)) + "₮";
   });
-
-  cartTotal.textContent = numberWithCommas(totalPrice.toFixed(1)) + "₮";
 }
-
-// ==============Sagsan dah baraag ustgadag heseg==================
+// ==============8. Sagsan dah baraag ustgadag heseg==================
 function removeCartItems(id) {
   selectedProducts = selectedProducts.filter((productsItem, index) => {
     return (
@@ -164,11 +164,11 @@ function removeCartItems(id) {
   });
 
   cartCounter();
-  addItemToCart();
+  showCartProducts();
   updateCartTotal();
 }
 
-// ==============Sagsan dah baraanii toog haruuldag function=======
+// ==============9. Sagsan dah baraanii toog haruuldag function=======
 const cartIcon = document.getElementsByClassName("fa-shopping-cart")[0];
 
 function cartCounter() {
@@ -183,7 +183,7 @@ function cartCounter() {
   }
 }
 
-// =======Sagsan dah baraanii toog NEMEHED mongon dun, too shirheg--ig oorchildog function============
+// =======10.Sagsan dah baraanii toog NEMEHED mongon dun, shirheg-iig oorchildog function========
 function increaseBtn() {
   const increaseCountBtn = document.getElementsByClassName("btn-add");
 
@@ -200,7 +200,7 @@ function increaseBtn() {
   }
 }
 
-// =======Sagsan dah baraanii toog HASAHAD mongon dun, too shirheg--ig oorchildog function============
+// =======11. Sagsan dah baraanii toog HASAHAD mongon dun, shirheg-iig oorchildog function============
 function decreaseBtn() {
   const decreaseCountBtn = document.getElementsByClassName("btn-remove");
 
@@ -217,6 +217,7 @@ function decreaseBtn() {
   }
 }
 
+// ===========================BUSAD=======================
 // ====Sagsan dah baraag haruulah tsonhiig neej haah heseg=========
 const cartBtn = document.getElementById("cartBtn");
 const cartItemContainer = document.getElementById("cart-item-container");
@@ -230,10 +231,9 @@ closeBtn.addEventListener("click", () => {
   cartItemContainer.classList.remove("show");
 });
 
-//===========navbar-iin 3n zuraas buhii button
+//===========navbar-iin 3n zuraas buhii button=================
 const toggle = document.getElementById("toggle");
-
-//======= toggle NAVbar garch irdeg heseg
+//======= NAVbar garch irdeg heseg===============
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("show-nav");
 });
@@ -270,7 +270,5 @@ function flowText() {
     idx = 1;
   }
 
-  setTimeout(flowText, 200);
+  setTimeout(flowText, 100);
 }
-
-//
