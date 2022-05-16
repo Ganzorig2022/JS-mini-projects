@@ -182,6 +182,30 @@ h1 {
   visibility: visible;
 }
 
+/*===========Category Button Styles=============== */
+.category-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 1000px;
+}
+.category-container button {
+  margin: 20px;
+  background-color: var(--primary-color);
+  color: #fff !important;
+  cursor: pointer;
+  padding: 5px 20px;
+  font-size: 1.2rem;
+  /* width: 100px; */
+  border-radius: 5px;
+  border: 0;
+}
+/* .category-container button:hover {
+  border-bottom: 2px solid var(--primary-color);
+} */
+
+/*===============ITEM DISPLAY STYLES=================*/
 .item-container {
   display: flex;
   flex-wrap: wrap;

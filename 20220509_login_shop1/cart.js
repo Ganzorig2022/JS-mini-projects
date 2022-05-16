@@ -1,5 +1,6 @@
 let products = [];
 
+const catBtn = document.getElementsByClassName("catBtn");
 let limit = 5;
 // let page = 1;
 // https://fakestoreapi.com/products?limit=${limit}
@@ -21,6 +22,19 @@ async function showApi() {
   for (let i = 0; i < posts.length; i++) {
     products.push(posts[i]);
   }
+  for (let i of catBtn) {
+    i.addEventListener("click", () => {
+      if (i.id == "all-products") {
+        listViewProducts(products);
+      } else {
+        const filteredItems = products.filter((item) => 
+           item.category == i.id)
+      
+        listViewProducts(filteredItems);
+        console.log(filteredItems);
+      }
+    });
+  }
 
   setTimeout(ready, 2000);
 }
@@ -37,7 +51,7 @@ const countItem = document.getElementById("itemCounter");
 const addToCartButtons = document.getElementsByClassName("btn-cart");
 
 function ready() {
-  listViewProducts();
+  listViewProducts(products);
   for (let i = 0; i < addToCartButtons.length; i++) {
     let btnAddToCart = addToCartButtons[i];
     btnAddToCart.addEventListener("click", function () {
@@ -71,10 +85,10 @@ function ready() {
 }
 
 // ================Delgetsend baigaa baraanuud=====================
-function listViewProducts() {
+function listViewProducts(data) {
   const listProducts = document.getElementsByClassName("item-container")[0];
   let itemHtml = "";
-  products.forEach((item) => {
+  data.forEach((item) => {
     itemHtml += `
     <div class="shop-item" data-id=${item.id}>
         <img
@@ -258,3 +272,5 @@ function flowText() {
 
   setTimeout(flowText, 200);
 }
+
+//
