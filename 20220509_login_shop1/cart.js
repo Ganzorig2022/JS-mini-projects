@@ -22,7 +22,7 @@ async function showApi() {
     products.push(posts[i]);
   }
 
-  setInterval(ready, 2000);
+  setTimeout(ready, 2000);
 }
 showApi();
 
@@ -60,6 +60,7 @@ function ready() {
           },
         };
         selectedProducts.push(itemCart);
+        console.log(selectedProducts);
       }
       shakeCartIcon();
       cartCounter();
