@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "name": "naraa",
+      "color": "green"
+    },
+    {
+      "name": "ganzo",
+      "color": "blue"
+    },
+    {
+      "name": "bataa",
+      "color": "red"
+    }
+  ]
+}
