@@ -17,7 +17,137 @@ start test mode - > enable
 
 data.json uusgeed
 
-import JSON -> 
+import JSON ->
 
 ===================================got to DOC ==========================
 
+===================================HOSTING ==========================
+firebase login
+firebase init
+hosting congifure files for.... (space-eer songood ENTER)
+use an existing project
+project-ee songood ENTER
+NO, NO
+firebase deploy
+
+terminal dr link ogno. Teren dr darhaar.
+
+===================================AUTHENTICATION ==========================
+go to console
+get started
+
+
+
+
+============================PROJECT MANAGEMENT by ESUI=========================
+5-7min
+tulgamdsan asuudal, yu ashiglasan
+
+task sets, time start end, budget, scope, 
+
+Project Ecosystem
+Tools, People, Process (Trello)
+
+Initiate - Plan- Execute - Close
+
+Teaching - Empowering Team - Communication- Controlling Change - Building relationships
+
+Project Outline-aa sain gargah
+
+======================AGILE argachlal=============
+
+Noots bololtsoo, Time-daa tulguurlaad hiine.
+Feature, feature-eer ni hiine.
+Login hiisnii daraa yah we, yugaa hiihee feature-ee shiideed yawna.
+
+=================== 4P Project Management ==========================
+
+People-Problem-Process-Project_plan_control
+
+Project Initiation:
+Business Case:
+Project Charter:
+Team:
+Project Office:
+Review:
+
+Project CHARTER:
+sudlah, 
+
+PROJECT RISK-ee todorhoiloh:
+
+Hen turuulj yarihin, hen project-oo yarihin, hen technology-oo yarihiin
+
+============================== 4 Stages of Team Development=======================
+
+Bagaa atgasan gar shig bolgoh.
+
+1. Forming - bagaa burduuleh
+2. Storming - hoorondoo margaldah ue gardag.
+3. Norming - hen yu, yu hdeg, chaddagv gedgee medeed ehleheer
+4. Perfmorming - uchraa olson bol, perform-oo ghged yawdag.
+5. 5th stage - aldaa onoogoo yariltsaad bagaa taraana.
+
+Team member Proactive bh heregtei.
+Esu-ees asuuh zvilee 1 hvn ni asuuwal zvgeer.
+Design-ii bagsh, Esu-ees zowlogoo awah.
+
+TRELLO app - tools. Ajil tolowlodog site.
+        
+
+============================== AGILE - SCRUM =======================
+
+1. SPRINT PLanning - Week by week.
+
+Heden Developer 1 sprint-d yamar yamar task-uuda hiihee shhiidne.
+
+2. DAily standup - daily meeting.
+Uchigdor yu hiisiin, onoodor yu hiihiin, margaash ali task ruugaa hiihin gdgee yariltsana. 15min mini-meeting.
+
+3. Sprint Demo - yu hiisnee bas haruulj aldaa onoogoo shideh.
+
+4. SPRINT RETROSPECT
+yu hiisnee, yu boloogv talaar yariltsana. Daraagiin udaa yaj ilvv hiih we gedgee yariltsana.
+
+======================AGILE PLANNING:==========================
+
+Plans are worthless, but planning is everything. "Eisenhower".
+
+=========================Product Backlog======================= 
+- bvh jijig taskuudiig helne. Detailed description-tei bh.
+- Bagaaraa hamt suuh heregtei.
+- Het ih bvh ajliin jagsaaltiig EHENDEE bitgii hiigeerei.
+- Backlog dr 13 ajil blaa gehed ehnii hediig ni 1-r SPRTINt-ed hiih we gedgee.
+
+=============================BACKLOG CYCLE:================
+
+- RECORD
+- UPDATE
+- PRIORITIZE
+- IMPLEMENT
+
+==========Prioritization Method:============================
+
+1. Business Value
+2. Dependency
+3. Importance
+
+
+ ===========MosCow Prioritization:==========================
+ Must have, 
+ should have, 
+ could have, 
+ wont't have
+
+TODO - bvh ajil ezentei (BACKLOG)
+--hen hen CSS-ee hiihii g.m.
+IN PROGRESS - rvv zooono. Hiij ehelsen ajaa..
+QA - hiisen ajlaa ene dr DRAG hiine.
+BLOCKED - gatsnan ajluudaa oruulna. 
+BUGGED - 
+IN REVIEW - 
+DONE -duussan bol iishee oruulna. 
+
+TRELLO dr 
+
+LOGO hiih, TEAM NAME hiih. 
